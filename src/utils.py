@@ -1,5 +1,6 @@
-import os , sys
+import os, sys
 import pickle
+import yaml
 import numpy as np
 import pandas as pd
 
@@ -51,3 +52,22 @@ def load_object(file_path):
             return pickle.load(file_obj)
     except Exception as e:
         logging.info('Exception Occured in load_object function utils')
+
+        def read_yaml(path_to_yaml) -> dict:
+            """reads yaml file and returns ConfigBox
+            Args:
+                path_to_yaml (str): path like input
+
+            Raises:
+                ValueError: if yaml file is empty
+                e: empty yaml file
+            Returns:
+                dict: dictionary of the yaml file contents
+            """
+            try:
+                with open(path_to_yaml) as yaml_file:
+                    content = yaml.safe_load(yaml_file)
+                    logging.info(f"yaml file: {path_to_yaml} loaded successfully")
+                    return content
+            except Exception as e:
+                raise e
