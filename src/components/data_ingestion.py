@@ -12,7 +12,7 @@ class DataIngestionconfig:
    test_data_path:str = os.path.join('artifacts' , 'test.csv')
    raw_data_path:str = os.path.join('artifacts','raw.csv')
 
-### create the data ingestion class
+
 class DataIngestion:
    def __init__(self) -> None:
       self.ingestion_config = DataIngestionconfig()
