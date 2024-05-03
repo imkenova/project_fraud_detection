@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore")
 
 def main():
 
-    st.title("Credit Card Fraud Detection")
+    st.title("Обнаружение мошенничества с кредитными картами")
 
    
     st.image('https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg',
@@ -20,14 +20,14 @@ def main():
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
 
-        st.subheader("Uploaded Data")
+        st.subheader("Загруженные данные")
         st.write(df)
 
         predictions = predict(df)
         final = pd.concat([df['ID'], pd.Series(predictions).map(
             {0: 'loyal', 1: 'defaulter'})], axis=1)
 
-        st.subheader("Predictions")
+        st.subheader("Предсказания")
         st.write(final)
 
 
