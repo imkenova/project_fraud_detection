@@ -1,0 +1,31 @@
+name: ML Workflow
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run data ingestion
+      run: python src/components/data_ingestion.py
+
+    - name: Run data validation
+      run: python src/components/data_validation.py
+
+    - name: Run data transformation
+      run: python src/components/data_transformation.py
+      
+    - name: Train model
+      run: python src/components/model_trainer.py

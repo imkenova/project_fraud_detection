@@ -1,4 +1,2 @@
 params:
-  'n_estimators': 300
-  'max_features': 'sqrt'
-  'criterion': 'gini'
+  'C': 0.1

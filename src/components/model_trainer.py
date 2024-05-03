@@ -11,7 +11,9 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-mlflow.set_tracking_uri('https://dagshub.com/imkenova/Credit_Card_Default_Prediction--main.mlflow')
+mlflow.set_tracking_uri('https://dagshub.com/imkenova/project_fraud_detection.mlflow')
+os.environ['MLFLOW_TRACKING_USERNAME'] = 'imkenova'
+os.environ['MLFLOW_TRACKING_PASSWORD'] = '2a258ef043924179df455e1024a246bfed159099'
 
 
 @dataclass(frozen=True)
@@ -38,16 +40,22 @@ class ModelTrainer:
             )
 
 
-            logging.info("Инициализация Random Forest")
-            model = RandomForestClassifier(random_state=2)
+            logging.info("Инициализация LogisticRegression")
+            model = LogisticRegression(solver='liblinear')
             model.set_params(**params) 
             model.fit(X_train,y_train)
             y_pred = model.predict(X_test)
             score = accuracy_score(y_test, y_pred)
             log_metric('accuracy', score)
 
-            logging.info(f"оценка точности RandomForestClassifier составляет : {score*100:.2f}%")
+            logging.info(f"оценка точности LogisticRegression составляет : {score*100:.2f}%")
 
+            mlflow.sklearn.log_model(
+                sk_model=model,
+                artifact_path="sklearn-model",
+                signature=signature,
+                registered_model_name="sk-learn-log_reg-model",
+            )
 
             save_object(
 
