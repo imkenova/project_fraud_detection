@@ -25,7 +25,7 @@ def main():
 
         predictions = predict(df)
         final = pd.concat([df['ID'], pd.Series(predictions).map(
-            {0: 'loyal', 1: 'defaulter'})], axis=1)
+            {0: 'ok', 1: 'fraud'})], axis=1)
 
         st.subheader("Предсказания")
         st.write(final)
