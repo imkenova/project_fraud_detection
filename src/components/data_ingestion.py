@@ -22,11 +22,11 @@ class DataIngestion:
       target = self.schema['target']
       try:
          df = pd.read_csv(os.path.join('notebooks/data','Credit_Card.csv'))
-         logging.info("Dataset read as pandas Dataframe")
+         logging.info("Набор данных прочитан как pandas Dataframe")
          os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
          df.to_csv(self.ingestion_config.raw_data_path,index=False)
 
-         logging.info('Raw data is created')
+         logging.info('Создаются исходные данные')
          target = target['name']
          X = df.drop(target, axis=1)
          y = df[target]
@@ -36,17 +36,17 @@ class DataIngestion:
          resampler = SMOTETomek(random_state=42)
          X , y = resampler.fit_resample(X, y)
          df=pd.concat([X, y],axis=1)        
-
+         logging.info('Данные разделены на обущающуюи тестовую выборки')
          train_set , test_set = train_test_split(df,test_size=0.3 , random_state=42)
          train_set.to_csv(self.ingestion_config.train_data_path,index =False,header = True)
          test_set.to_csv(self.ingestion_config.test_data_path,index =False,header = True)
-         logging.info('Ingestion of data is completed')
+         logging.info('Сбор данных завершен')
          return (
             self.ingestion_config.train_data_path,
             self.ingestion_config.test_data_path
          )
       except Exception as e:
-         logging.info('Exception occured at data ingestion stage')
+         logging.info('Исключение возникло на этапе получения данных')
          raise CustomException(e,sys)
       
 if __name__ == "__main__":   

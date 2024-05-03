@@ -26,13 +26,13 @@ class DataTransformation:
     def get_data_transformation_object(self):
 
         try:
-            logging.info("Data transformation initialized")
+            logging.info("Инициализация преобразования данных")
 
         
             cat_cols = ['SEX', 'EDUCATION', 'MARRIAGE']
             numerical_cols = ['LIMIT_BAL', 'AGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5','PAY_6', 'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6', 'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5','PAY_AMT6']
 
-            logging.info('Data transformation columns created')
+            logging.info('Инжиниринг признаков завершен')
 
             numerical_pipeline = Pipeline(
             steps=[
@@ -53,12 +53,12 @@ class DataTransformation:
                 ('numerical_pipeline',numerical_pipeline, numerical_cols),
                 ('categorical_pipeline',cat_pipeline , cat_cols)
                 ])
-            logging.info('Data Transformation Preprocessor loaded successfully')
+            logging.info('Предварительный обработчик преобразования данных успешно создан')
 
             return preprocessor
 
         except Exception as e:
-            logging.info("Exception occured in Data Transformation Preprocessor")
+            logging.info("Возникло исключение в процессе создания препроцессора преобразования данных")
             raise CustomException(e,sys)
 
 
@@ -76,7 +76,7 @@ class DataTransformation:
                 schema = self.schema['target']
                 input_feature_df = pd.concat([train_df.assign(ind='train'), test_df.assign(ind='test')])
 
-                logging.info("Read train and test data completed")
+                logging.info("Завершено считывание обучающих и тестовых данных")
                 logging.info(f'Train Datatrame Head : \n {train_df.head().to_string()}')
                 logging.info(f'Test Datatrame Head : \n {test_df.head().to_string()}')
 
@@ -113,7 +113,7 @@ class DataTransformation:
                 input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
                 input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
-                logging.info("Applying preprocessing objects on training data and test data")
+                logging.info("Применение объектов предварительной обработки к обучающим и тестовым данным")
 
                 train_arr = np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
                 test_arr = np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
@@ -130,9 +130,9 @@ class DataTransformation:
                 )
 
             except Exception as e:
-                logging.info("Error occured while applying preprocessing objects")
+                logging.info("Возникла ошибка при применении объекта предварительной обработки")
                 raise CustomException(e,sys)
 
         else:
-            logging.info('Error occured in data validation kindly check the data')
+            logging.info('Произошла ошибка при проверке данных, пожалуйста, проверьте данные')
             raise ValueError('Error in data validation')

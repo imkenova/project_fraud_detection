@@ -18,7 +18,7 @@ class DataValidation:
         self.schema = read_yaml('SCHEMA.yaml')
 
     def initiate_data_validation(self):
-        logging.info('Data validation started')
+        logging.info('Начата проверка данных')
         try:
             schema = self.schema['columns']
             df = pd.read_csv(self.validation_config.data_path)
@@ -30,10 +30,11 @@ class DataValidation:
                     break
             validation_status = flag
             with open(self.validation_config.STATUS_FILE,'w') as f:
-                f.write(f"Validation status: {validation_status}")
-            logging.info(f"Validation status: {validation_status}")
+                f.write(f"Статус проверки: {validation_status}")
+            logging.info(f"Статус проверки: {validation_status}")
+            logging.info("\nДанные соответствуют схеме")
         except Exception as e:
-            logging.info("Error occurred while data validation")
+            logging.info("Возникла ошибка при проверке данных")
             raise CustomException(e,sys)
 
 if __name__ == "__main__":
