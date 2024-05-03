@@ -40,16 +40,22 @@ class ModelTrainer:
             )
 
 
-            logging.info("Инициализация Random Forest")
-            model = RandomForestClassifier(random_state=2)
+            logging.info("Инициализация LogisticRegression")
+            model = LogisticRegression(solver='liblinear')
             model.set_params(**params) 
             model.fit(X_train,y_train)
             y_pred = model.predict(X_test)
             score = accuracy_score(y_test, y_pred)
             log_metric('accuracy', score)
 
-            logging.info(f"оценка точности RandomForestClassifier составляет : {score*100:.2f}%")
+            logging.info(f"оценка точности LogisticRegression составляет : {score*100:.2f}%")
 
+            mlflow.sklearn.log_model(
+                sk_model=model,
+                artifact_path="sklearn-model",
+                signature=signature,
+                registered_model_name="sk-learn-log_reg-model",
+            )
 
             save_object(
 
