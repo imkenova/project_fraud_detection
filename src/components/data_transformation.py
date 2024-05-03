@@ -12,7 +12,7 @@ from src.utils import save_object
 from src.utils import read_yaml
 
 
-@dataclass
+@dataclass(frozen=True)
 class DataTransformationConfig:
     preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
     STATUS_FILE: str = os.path.join('artifacts','data_validation_status.txt')

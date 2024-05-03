@@ -4,3 +4,5 @@ seaborn
 flask
 scikit-learn
 PyYAML
+imblearn
+mlflow
