@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обнаружение мошенничества с кредитными картами</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .img-fluid {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Обнаружение мошенничества с кредитными картами</h1>
+        <img src="https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg" alt="Credit Card Image" class="img-fluid">
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" class="form-control-file">
+            <button type="submit" class="btn btn-primary">Загрузить</button>
+        </form>
+    </div>
+</body>
+</html>

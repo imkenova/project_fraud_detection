@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты предсказаний</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            margin-bottom: 20px;
+        }
+        .btn-back {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Результаты предсказаний</h1>
+        <h2>Загруженные данные</h2>
+        {{ tables[0]|safe }}
+        <h2>Предсказания</h2>
+        {{ tables[1]|safe }}
+        <div class="btn-back">
+            <a href="/" class="btn btn-secondary">Назад</a>
+        </div>
+    </div>
+</body>
+</html>
